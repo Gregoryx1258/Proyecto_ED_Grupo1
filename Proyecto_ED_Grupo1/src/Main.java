@@ -14,8 +14,8 @@ public class Main {
      */
     
     public static void main(String[] args) {
-    
-    
+
+        CampoBatalla oj1=new CampoBatalla();
+        oj1.campoBatalla();  
     }
-    
 }
