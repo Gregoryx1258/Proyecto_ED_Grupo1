@@ -5,8 +5,30 @@
 
 /**
  *
- * @author gaval
+ * @author 
  */
 public class NodoTropa {
+    private Tropa dato;
+    private NodoTropa next;
+
+    public NodoTropa(Tropa dato) {
+        this.dato = dato;
+    }
+
+    public void setDato(Tropa dato) {
+        this.dato = dato;
+    }
+
+    public void setNext(NodoTropa next) {
+        this.next = next;
+    }
+
+    public Tropa getDato() {
+        return dato;
+    }
+
+    public NodoTropa getNext() {
+        return next;
+    }
     
 }

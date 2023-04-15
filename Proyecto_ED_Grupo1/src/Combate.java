@@ -5,7 +5,7 @@
 
 /**
  *
- * @author Usuario
+ * @author 
  */
 public class Combate {
     
