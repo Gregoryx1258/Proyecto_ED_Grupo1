@@ -8,7 +8,7 @@
  * @author 
  */
 public class Tropa {
-    String nombre, ventaja;
+    String nombre, ventaja; //Ventaja corresponde a la variable que guarda contra quien gana la tropa seleccionada
     int dano;
 
     public Tropa(String nombre, String ventaja, int dano) {
