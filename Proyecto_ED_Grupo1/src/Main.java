@@ -15,7 +15,10 @@ public class Main {
     
     public static void main(String[] args) {
 
-        CampoBatalla oj1=new CampoBatalla();
-        oj1.campoBatalla();  
+//        CampoBatalla oj1=new CampoBatalla();
+//        oj1.campoBatalla();  
+        
+        Juego obj2 = new Juego();
+        obj2.jugar();
     }
 }
