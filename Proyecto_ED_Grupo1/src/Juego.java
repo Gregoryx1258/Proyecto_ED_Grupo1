@@ -5,8 +5,8 @@
 
 /**
  *
- * @author 
+ * @author gaval
  */
-public class Combate {
+public class Juego {
     
 }
