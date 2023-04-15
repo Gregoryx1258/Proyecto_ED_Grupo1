@@ -10,6 +10,7 @@
 public class CampoBatalla {
     
     public void campoBatalla(){
+        long startTime = System.currentTimeMillis();
         int vidaCastCPU=10, vidaCastJug=10;
         String[][] matriz=new String[3][8];
         for (int i=0;i<3;i++){
@@ -40,6 +41,12 @@ public class CampoBatalla {
                    System.out.print(matriz[i][j]+" "); 
                 }
             System.out.println(""); 
-        } 
+        }
+        
+        long endTime = System.currentTimeMillis();
+        long elapsedTime = endTime - startTime;
+        double elapsedSeconds = (double) elapsedTime / 1000.0;
+
+        System.out.println("Tiempo transcurrido: " + elapsedSeconds + " segundos");
     }
 }
