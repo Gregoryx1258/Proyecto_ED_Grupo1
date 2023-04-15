@@ -37,6 +37,5 @@ nbactions.xml
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
-/G2_SC-304_VN_Practica1/nbproject/private/
-/G2_SC-304_VN_Practica1/build/
+/Proyecto_ED_Grupo1/build/
 /Proyecto_ED_Grupo1/nbproject/private/
