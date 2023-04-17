@@ -9,12 +9,14 @@
  */
 public class Tropa {
     String nombre, ventaja; //Ventaja corresponde a la variable que guarda contra quien gana la tropa seleccionada
-    int dano;
+    int camino;
+    double dano;
 
-    public Tropa(String nombre, String ventaja, int dano) {
+    public Tropa(String nombre, String ventaja, double dano, int camino) {
         this.nombre = nombre;
         this.ventaja = ventaja;
         this.dano = dano;
+        this.camino = camino;
     }
 
     public void setNombre(String nombre) {
@@ -29,6 +31,10 @@ public class Tropa {
         this.dano = dano;
     }
 
+    public void setCamino(int camino) {
+        this.camino = camino;
+    }
+
     public String getNombre() {
         return nombre;
     }
@@ -37,8 +43,13 @@ public class Tropa {
         return ventaja;
     }
 
-    public int getDano() {
+    public double getDano() {
         return dano;
     }
+
+    public int getCamino() {
+        return camino;
+    }
+
     
 }
