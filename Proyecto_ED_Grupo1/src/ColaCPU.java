@@ -23,7 +23,7 @@ public class ColaCPU {
             frente = nuevoNodo;
             ultimo = nuevoNodo;                    
         } else{
-            ultimo.setAtras(nuevoNodo);
+            ultimo.setNext(nuevoNodo);
             ultimo=nuevoNodo;
         }
         largo++;
@@ -32,8 +32,8 @@ public class ColaCPU {
     public NodoTropa atiende(){
         NodoTropa aux = frente;
         if(frente!=null){
-            frente=frente.getAtras();
-            aux.setAtras(null);
+            frente=frente.getNext();
+            aux.setNext(null);
             largo--;
         }
         return aux;
