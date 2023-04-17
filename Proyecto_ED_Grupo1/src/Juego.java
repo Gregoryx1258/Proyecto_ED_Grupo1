@@ -26,6 +26,15 @@ String personaje=null;
 
 public void jugar() {
     //Ciclo de las oleadas -General-
+    System.out.println("Este juego consiste en derrotar el castillo del jugador contrario+"
+            + "\nSe ecogeran tropas para atacar el castillo, habrán dos caminos, si dos tropas se topan, pelearan"
+            + "entre ellas.\nLos Caballeros ganan a los arqueros, los magos a los caballeros y"
+            + "los arqueros ganan a los magos, la tabla de daño es:"
+            + "\nMago      ->1.5"
+            + "\nCaballero ->2"
+            + "\nArquero   ->1"
+            + "\n\nPresione enter para empezar el juego\n-");
+    String enter = scanner.nextLine();
     while (cont==0) {
         System.out.println("Oleada #"+numOleada+"\n****FASE DE PREPARACION***\n\n");
         cantidadTropas = numOleada + 4;
@@ -98,7 +107,7 @@ public void jugar() {
         System.out.println(obj3.toString());
         System.out.println("\n\n***FIN DE FASE DE PREPARACION***");
         System.out.println("\n\n***COMIENZA LA PRIMER OLEADA***");
-        
+        obj1.campoBatalla();
         numOleada++;
     
     }

@@ -36,6 +36,7 @@ public class ColaJug {
             aux.setNext(null);
             largo--;
         }
+        System.out.print(aux.getDato().camino);
         return aux;
     }
     @Override
