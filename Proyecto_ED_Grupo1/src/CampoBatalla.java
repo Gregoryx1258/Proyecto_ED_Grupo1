@@ -94,4 +94,67 @@ public class CampoBatalla {
         }
         
     }
+     public void campoBatalla2() {
+        String[][] matriz = new String[3][8];
+
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 8; j++) {
+                matriz[i][j] = "-";
+            }
+        }
+
+
+        // jugador 1 empieza
+        boolean turnoJugador = true;
+
+        // 
+        while (vidaCastCPU > 0 && vidaCastJug > 0) {
+            NodoTropa tropaViva;
+
+            // Seleccionar la tropa actual dependiendo de quién mueva primero
+            if (turnoJugador) {
+                tropaViva = obj2.atiende();
+            } else {
+                tropaViva = obj3.atiende();
+            }
+
+            // Movar la tropa actual hacia el castillo ernemigo
+            for (int j = 0; j < 7; j++) {
+                int x, y;
+
+                if (turnoJugador) {
+                    x = tropaViva.getDato().camino - 1;
+                    y = j;
+                } else {
+                    x = tropaViva.getDato().camino - 1;
+                    y = 7 - j;
+                }
+
+                // Si se encuentra, hay una batalla
+                if (matriz[x][y] != "-" && matriz[x][y] != tropaViva.getDato().letra) {
+                    String ganador = tropaViva.getDato().letra + matriz[x][y];
+
+                    // Si la tropa del jugador gano avanza y se elimina la tropa del cpu
+                    if (ganador.equals(tropaViva.getDato().letra)) {
+                        matriz[x][y] = "-";
+                        if (turnoJugador) {
+                            matriz[x][y - 1] = tropaViva.getDato().letra;
+                        } else {
+                            matriz[x][y + 1] = tropaViva.getDato().letra;
+                        }
+                    }
+                    // Si la tropa del cpu ganó, se elimina la tropa del jugador
+                    else {
+                        if (turnoJugador) {
+                            vidaCastJug -= tropaViva.getDato().dano;
+                        } else {
+                            vidaCastCPU -= tropaViva.getDato().dano;
+                        }
+                        break;
+                    }
+                }
+            }
+        }
+     }
+    
 }
