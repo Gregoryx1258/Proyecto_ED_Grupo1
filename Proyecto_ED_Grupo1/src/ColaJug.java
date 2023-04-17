@@ -38,5 +38,18 @@ public class ColaJug {
         }
         return aux;
     }
-   
+    @Override
+    public String toString(){
+        int cont=1;
+        NodoTropa aux=frente;
+        String s="\nLista Tropas seleccionadas por el Jugador: \n";
+        while(aux!=null && cont<6){
+            s+=cont+"- "+aux.getDato().getNombre()+"\n";
+            aux=aux.getNext();
+            cont++;
+        }
+        return s;
+        } 
+    
+    
 }
