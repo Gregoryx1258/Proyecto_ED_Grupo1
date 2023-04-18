@@ -18,7 +18,7 @@ public class Main {
 //        CampoBatalla oj1=new CampoBatalla();
 //        oj1.campoBatalla();  
         
-        Juego obj1 = new Juego();
-        obj1.jugar();
+        Menu obj1 = new Menu();
+        obj1.menu();
     }
 }

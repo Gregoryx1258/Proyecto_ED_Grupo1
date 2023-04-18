@@ -5,7 +5,7 @@
 
 /**
  *
- * @author danielsm27
+ * @author 
  */
 public class ColaJug {
     private NodoTropa frente;

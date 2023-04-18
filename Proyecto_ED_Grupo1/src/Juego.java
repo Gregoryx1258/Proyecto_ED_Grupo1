@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 /**
  *
- * @author gaval
+ * @author 
  */
 public class Juego {
 //Declaracion de objetos de las clases a llamar
@@ -344,6 +344,7 @@ public void jugar() {
             }//Fin cuarta situacion  ***********************
             contbatallas++;
         }// Fin contador batallas
+        
         NodoTropa tropaJug = obj2.atiende();
         for (int i=0;i<3;i++){
             for (int j=0;j<8;j++){
@@ -430,6 +431,7 @@ public void jugar() {
                 System.out.print("\n");
                 this.delay(1000);
     }
+    
 }//Parentesis final
 
 
