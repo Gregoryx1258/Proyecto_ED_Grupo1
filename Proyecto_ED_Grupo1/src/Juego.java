@@ -111,7 +111,6 @@ public void jugar() {
         numOleada++;
     
     }//Cierre de ciclo while de los cases
-    scanner.close();
     }//Cierre de metodo jugar
 
   ////////// Fin de la fase de preparacion, inicio de la seccion de mostrar la batalla

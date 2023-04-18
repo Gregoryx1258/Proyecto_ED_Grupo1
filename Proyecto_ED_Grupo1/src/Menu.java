@@ -27,13 +27,12 @@ public class Menu {
                 break;
             case 2:
                 cont++;
-                    break;
+                break;
             default :
                 System.out.println("La opción digitada es incorrecta");
                 break;    
             }        
         }
-    scanner.close();
+    
     }
-
 }
