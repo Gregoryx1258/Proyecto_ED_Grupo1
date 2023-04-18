@@ -34,6 +34,11 @@ public void jugar() {
             + "\nArquero   ->1"
             + "\n\nPresione enter para empezar el juego\n-");
     String enter = scanner.nextLine();
+    try {
+        Thread.sleep(3000); // Retraso de 3 segundos
+    } catch (InterruptedException e) {
+        e.printStackTrace();
+    }
     while (cont==0) {
         System.out.println("Oleada #"+numOleada+"\n****FASE DE PREPARACION***\n\n");
         cantidadTropas = numOleada + 4;
@@ -121,7 +126,10 @@ public void jugar() {
     public void campoBatalla(){ 
         int contbatallas=1;
         String[][] matriz=new String[3][8];
-         
+        try {
+            Thread.sleep(2000); // Retraso de 2 segundos
+        } catch (InterruptedException e) {
+        }
         while (contbatallas<numOleada + 4){
             for (int i=0;i<3;i++){
                 for (int j=0;j<8;j++){
