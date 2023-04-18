@@ -13,10 +13,7 @@ public class Main {
      * @param args the command line arguments
      */
     
-    public static void main(String[] args) {
-
-//        CampoBatalla oj1=new CampoBatalla();
-//        oj1.campoBatalla();  
+    public static void main(String[] args) { 
         
         Menu obj1 = new Menu();
         obj1.menu();
