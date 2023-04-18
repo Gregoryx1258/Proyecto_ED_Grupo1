@@ -13,7 +13,6 @@ import java.util.Scanner;
  */
 public class Juego {
 //Declaracion de objetos de las clases a llamar
-CampoBatalla obj1 = new CampoBatalla();
 ColaJug obj2 = new ColaJug();
 ColaCPU obj3 = new ColaCPU();
 Random r = new Random();
@@ -26,6 +25,15 @@ String personaje=null;
 
 public void jugar() {
     //Ciclo de las oleadas -General-
+    System.out.println("Este juego consiste en derrotar el castillo del jugador contrario+"
+            + "\nSe ecogeran tropas para atacar el castillo, habrán dos caminos, si dos tropas se topan, pelearan"
+            + "entre ellas.\nLos Caballeros ganan a los arqueros, los magos a los caballeros y"
+            + "los arqueros ganan a los magos, la tabla de daño es:"
+            + "\nMago      ->1.5"
+            + "\nCaballero ->2"
+            + "\nArquero   ->1"
+            + "\n\nPresione enter para empezar el juego\n-");
+    String enter = scanner.nextLine();
     while (cont==0) {
         System.out.println("Oleada #"+numOleada+"\n****FASE DE PREPARACION***\n\n");
         cantidadTropas = numOleada + 4;
@@ -99,14 +107,9 @@ public void jugar() {
         System.out.println("\n\n***FIN DE FASE DE PREPARACION***");
         System.out.println("\n\n***COMIENZA LA  OLEADA #"+numOleada+"***");
         
+        this.campoBatalla();
         numOleada++;
     
-<<<<<<< Updated upstream
-    }
-scanner.close();
-}
-}
-=======
     }//Cierre de ciclo while de los cases
     scanner.close();
     }//Cierre de metodo jugar
@@ -235,177 +238,12 @@ scanner.close();
                 
             //Fin segunda situacion  ***********************
 
-            }else if(tropaJug.getDato().camino==1 && tropaCPU.getDato().camino==2){
-                matriz[0][0]="-- ";
-                matriz[2][0]="-- ";
-                matriz[0][7]=" --";
-                matriz[2][7]=" --";
-                matriz[1][1]="T";
-                matriz[1][6]="T";
-                matriz[0][2]= tropaJug.getDato().letra.toUpperCase();
+            }
 
-                matriz[1][0]=Double.toString(vidaCastJug);
-                matriz[1][7]=Double.toString(vidaCastCPU);
-                this.mostrarBatalla(matriz);
-                matriz[2][5]= tropaCPU.getDato().letra.toUpperCase();
-                this.mostrarBatalla(matriz);
-                matriz[0][2]= "-";
-                matriz[0][3]= tropaJug.getDato().letra.toUpperCase();
-                this.mostrarBatalla(matriz);
-                matriz[2][5]= "-";
-                matriz[2][4]= tropaCPU.getDato().letra.toUpperCase();
-                this.mostrarBatalla(matriz);
-                matriz[0][3]= "-";
-                matriz[0][4]= tropaJug.getDato().letra.toUpperCase();
-                this.mostrarBatalla(matriz);
-                matriz[2][4]= "-";
-                matriz[2][3]= tropaCPU.getDato().letra.toUpperCase();
-                this.mostrarBatalla(matriz);
-                matriz[0][4]= "-";
-                matriz[0][5]= tropaJug.getDato().letra.toUpperCase();
-                this.mostrarBatalla(matriz);
-                matriz[2][3]= "-";
-                matriz[2][2]= tropaCPU.getDato().letra.toUpperCase();
-                this.mostrarBatalla(matriz);
-                matriz[0][5]= "-";
-                matriz[1][5]= tropaJug.getDato().letra.toUpperCase();
-                vidaCastCPU-=tropaJug.getDato().getDano();
-                matriz[1][7]=Double.toString(vidaCastCPU);
-                this.mostrarBatalla(matriz);
-                matriz[2
-                        ][2]= "-";
-                matriz[1][2]= tropaCPU.getDato().letra.toUpperCase();
-                vidaCastJug-=tropaCPU.getDato().getDano();
-                matriz[1][0]=Double.toString(vidaCastJug);
-                this.mostrarBatalla(matriz);
-            //Fin tercera situacion  ***********************
-
-            }else if(tropaJug.getDato().camino==2 && tropaCPU.getDato().camino==2){
-                matriz[0][0]="-- ";
-                matriz[2][0]="-- ";
-                matriz[0][7]=" --";
-                matriz[2][7]=" --";
-                matriz[1][1]="T";
-                matriz[1][6]="T";
-                matriz[2][2]= tropaJug.getDato().letra.toUpperCase();
-
-                matriz[1][0]=Double.toString(vidaCastJug);
-                matriz[1][7]=Double.toString(vidaCastCPU);
-                this.mostrarBatalla(matriz);
-
-                matriz[2][5]= tropaCPU.getDato().letra.toUpperCase();
-                this.mostrarBatalla(matriz);
-                matriz[2][2]= "-";
-                matriz[2][3]= tropaJug.getDato().letra.toUpperCase();
-                this.mostrarBatalla(matriz);
-                matriz[2][5]= "-";
-                
-                matriz[2][4]= tropaCPU.getDato().letra.toUpperCase();
-                this.mostrarBatalla(matriz);
-                //Primera validacion de batalla
-                if (tropaJug.getDato().ventaja==tropaCPU.getDato().letra){
-                    matriz[2][3]= "-";
-                    matriz[2][4]= "X";
-                    matriz[2][5]= tropaJug.getDato().letra.toUpperCase();
-                    this.mostrarBatalla(matriz);
-
-                    vidaCastCPU-=tropaJug.getDato().getDano();
-                    matriz[1][7]=Double.toString(vidaCastCPU);
-                    matriz[2][5]= "-";
-                    matriz[1][5]= tropaJug.getDato().letra.toUpperCase();
-                    this.mostrarBatalla(matriz);
-                } else if (tropaCPU.getDato().ventaja==tropaJug.getDato().letra){ //Segunda validacion de batalla
-                    matriz[2][4]= "-";
-                    matriz[2][3]= "X";
-                    matriz[2][2]= tropaCPU.getDato().letra.toUpperCase();
-                    this.mostrarBatalla(matriz);
-
-                    vidaCastJug-=tropaCPU.getDato().getDano();
-                    matriz[1][0]=Double.toString(vidaCastJug);
-                    matriz[2][2]= "-";
-                    matriz[1][2]= tropaCPU.getDato().letra.toUpperCase();
-                    this.mostrarBatalla(matriz);
-                } else{ //Tercera validacion de batalla
-                    matriz[2][4]= "X";
-                    matriz[2][3]= "X";
-                    for (int i=0;i<3;i++){
-                        for (int j=0;j<8;j++){
-                           System.out.print(matriz[i][j]+" "); 
-                        }
-                    System.out.println(""); 
-                    } 
-                    this.delay(200);
-                    System.out.print("\n\n----Ambas tropas murieron en el combate---\n\n");
-                    this.delay(1000);
-                }
-            }//Fin cuarta situacion  ***********************
+            
             contbatallas++;
         }// Fin contador batallas
-        NodoTropa tropaJug = obj2.atiende();
-        for (int i=0;i<3;i++){
-            for (int j=0;j<8;j++){
-               matriz[i][j]="-"; 
-            }
-        }   
-        if(tropaJug.getDato().camino==2){
-                matriz[0][0]="-- ";
-                matriz[2][0]="-- ";
-                matriz[0][7]=" --";
-                matriz[2][7]=" --";
-                matriz[1][1]="T";
-                matriz[1][6]="T";
-                matriz[2][2]= tropaJug.getDato().letra.toUpperCase();
-
-                matriz[1][0]=Double.toString(vidaCastJug);
-                matriz[1][7]=Double.toString(vidaCastCPU);
-                this.mostrarBatalla(matriz);
-                matriz[2][2]= "-";
-                matriz[2][3]= tropaJug.getDato().letra.toUpperCase();
-                this.mostrarBatalla(matriz);
-                matriz[2][3]= "-";
-                matriz[2][4]= tropaJug.getDato().letra.toUpperCase();
-                this.mostrarBatalla(matriz);
-                matriz[2][4]= "-";
-                matriz[2][5]= tropaJug.getDato().letra.toUpperCase();
-                this.mostrarBatalla(matriz);
-                matriz[2][5]= "-";
-                matriz[1][5]= tropaJug.getDato().letra.toUpperCase();
-                vidaCastCPU-=tropaJug.getDato().getDano();
-                matriz[1][7]=Double.toString(vidaCastCPU);
-                this.mostrarBatalla(matriz);
-                
-            //Fin segunda situacion  ***********************
-
-            }else if(tropaJug.getDato().camino==1){
-                matriz[0][0]="-- ";
-                matriz[2][0]="-- ";
-                matriz[0][7]=" --";
-                matriz[2][7]=" --";
-                matriz[1][1]="T";
-                matriz[1][6]="T";
-                matriz[0][2]= tropaJug.getDato().letra.toUpperCase();
-
-                matriz[1][0]=Double.toString(vidaCastJug);
-                matriz[1][7]=Double.toString(vidaCastCPU);
-                this.mostrarBatalla(matriz);
-                matriz[0][2]= "-";
-                matriz[0][3]= tropaJug.getDato().letra.toUpperCase();
-                this.mostrarBatalla(matriz);
-                matriz[0][3]= "-";
-                matriz[0][4]= tropaJug.getDato().letra.toUpperCase();
-                this.mostrarBatalla(matriz);
-                matriz[0][4]= "-";
-                matriz[0][5]= tropaJug.getDato().letra.toUpperCase();
-                this.mostrarBatalla(matriz);
-                matriz[0][5]= "-";
-                matriz[1][5]= tropaJug.getDato().letra.toUpperCase();
-                vidaCastCPU-=tropaJug.getDato().getDano();
-                matriz[1][7]=Double.toString(vidaCastCPU);
-                this.mostrarBatalla(matriz);
-                
-            //Fin tercera situacion  ***********************
-
-            }
+        
   
     }//Cierre de metodo campo batalla
     
@@ -430,4 +268,3 @@ scanner.close();
 }//Parentesis final
 
 
->>>>>>> Stashed changes
