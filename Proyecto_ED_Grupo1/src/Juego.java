@@ -13,7 +13,6 @@ import java.util.Scanner;
  */
 public class Juego {
 //Declaracion de objetos de las clases a llamar
-CampoBatalla obj1 = new CampoBatalla();
 ColaJug obj2 = new ColaJug();
 ColaCPU obj3 = new ColaCPU();
 Random r = new Random();
@@ -107,7 +106,8 @@ public void jugar() {
         System.out.println(obj3.toString());
         System.out.println("\n\n***FIN DE FASE DE PREPARACION***");
         System.out.println("\n\n***COMIENZA LA PRIMER OLEADA***");
-        obj1.campoBatalla();
+        
+        this.campoBatalla();
         numOleada++;
     
     }//Cierre de ciclo while de los cases
@@ -118,162 +118,284 @@ public void jugar() {
     ///Realizada en la misma clase ya que los metodos de las colas no se pueden utilizar en multiples clases a la vez
     //Declaracion Variables
     double vidaCastCPU=10, vidaCastJug=10;
-    public void campoBatalla(){     
+    public void campoBatalla(){ 
+        int contbatallas=1;
         String[][] matriz=new String[3][8];
-        for (int i=0;i<3;i++){
-            for (int j=0;j<8;j++){
-               matriz[i][j]="-"; 
-            }
-        }  
-        NodoTropa tropaJug = obj2.atiende();
-        NodoTropa tropaCPU = obj3.atiende();
-        //Van las dos primeras tropas por el mismo camino
-        if (tropaJug.getDato().camino==1 || tropaCPU.getDato().camino==1){
-            matriz[0][0]="-- ";
-            matriz[2][0]="-- ";
-            matriz[0][7]=" --";
-            matriz[2][7]=" --";
-            matriz[1][1]="C";
-            matriz[1][6]="C";
-            matriz[0][2]="M";
-            matriz[1][0]=Double.toString(vidaCastJug);
-            matriz[1][7]=Double.toString(vidaCastCPU);
+         
+        while (contbatallas<numOleada + 5){
             for (int i=0;i<3;i++){
-                    for (int j=0;j<8;j++){
-                       System.out.print(matriz[i][j]+" "); 
-                    }
-                System.out.println(""); 
+                for (int j=0;j<8;j++){
+                   matriz[i][j]="-"; 
+                }
             } 
-            System.out.print("\n");
+            NodoTropa tropaJug = obj2.atiende();
+            NodoTropa tropaCPU = obj3.atiende(); 
+            System.out.println("\n");
+            //Van las dos primeras tropas por el mismo camino
+            if (tropaJug.getDato().camino==1 || tropaCPU.getDato().camino==1){
+                matriz[0][0]="-- ";
+                matriz[2][0]="-- ";
+                matriz[0][7]=" --";
+                matriz[2][7]=" --";
+                matriz[1][1]="T";
+                matriz[1][6]="T";
+                matriz[0][2]= tropaJug.getDato().letra.toUpperCase();
 
-            matriz[1][0]=Double.toString(vidaCastJug);
-            matriz[1][7]=Double.toString(vidaCastCPU);
-            matriz[0][2]="-";
-            matriz[0][3]="M";
-            for (int i=0;i<3;i++){
-                    for (int j=0;j<8;j++){
-                       System.out.print(matriz[i][j]+" "); 
-                    }
-            System.out.println(""); 
-            }
-        
-        }else if(tropaJug.getDato().camino==2 || tropaCPU.getDato().camino==1){
-            matriz[0][0]="-- ";
-            matriz[2][0]="-- ";
-            matriz[0][7]=" --";
-            matriz[2][7]=" --";
-            matriz[1][1]="C";
-            matriz[1][6]="C";
-            matriz[0][2]="M";
-            matriz[1][0]=Double.toString(vidaCastJug);
-            matriz[1][7]=Double.toString(vidaCastCPU);
-            for (int i=0;i<3;i++){
-                    for (int j=0;j<8;j++){
-                       System.out.print(matriz[i][j]+" "); 
-                    }
+                matriz[1][0]=Double.toString(vidaCastJug);
+                matriz[1][7]=Double.toString(vidaCastCPU);
+                for (int i=0;i<3;i++){
+                        for (int j=0;j<8;j++){
+                           System.out.print(matriz[i][j]+" "); 
+                        }
+                    System.out.println(""); 
+                } 
+                System.out.print("\n");
+
+                matriz[0][5]= tropaCPU.getDato().letra.toUpperCase();
+                for (int i=0;i<3;i++){
+                        for (int j=0;j<8;j++){
+                           System.out.print(matriz[i][j]+" "); 
+                        }
+                    System.out.println(""); 
+                } 
+                System.out.print("\n");
+                matriz[0][2]= "-";
+                matriz[0][5]= "-";
+                matriz[0][3]= tropaJug.getDato().letra.toUpperCase();
+                matriz[0][4]= tropaCPU.getDato().letra.toUpperCase();
+                for (int i=0;i<3;i++){
+                        for (int j=0;j<8;j++){
+                           System.out.print(matriz[i][j]+" "); 
+                        }
+                    System.out.println(""); 
+                } 
+                System.out.print("\n");
+                
+                //Primera validacion de batalla
+                if (tropaJug.getDato().ventaja==tropaCPU.getDato().letra){
+                    matriz[0][3]= "-";
+                    matriz[0][4]= "X";
+                    matriz[0][5]= tropaJug.getDato().letra.toUpperCase();
+                    for (int i=0;i<3;i++){
+                        for (int j=0;j<8;j++){
+                           System.out.print(matriz[i][j]+" "); 
+                        }
+                    System.out.println(""); 
+                    } 
+                    System.out.print("\n");
+
+                    vidaCastCPU-=tropaJug.getDato().getDano();
+                    matriz[1][7]=Double.toString(vidaCastCPU);
+                    matriz[0][5]= "-";
+                    matriz[1][5]= tropaJug.getDato().letra.toUpperCase();
+                    for (int i=0;i<3;i++){
+                        for (int j=0;j<8;j++){
+                           System.out.print(matriz[i][j]+" "); 
+                        }
+                    System.out.println(""); 
+                    } 
+                    System.out.print("\n");
+                } else if (tropaCPU.getDato().ventaja==tropaJug.getDato().letra){ //Segunda validacion de batalla
+                    matriz[0][4]= "-";
+                    matriz[0][3]= "X";
+                    matriz[0][2]= tropaCPU.getDato().letra.toUpperCase();
+                    for (int i=0;i<3;i++){
+                        for (int j=0;j<8;j++){
+                           System.out.print(matriz[i][j]+" "); 
+                        }
+                    System.out.println(""); 
+                    } 
+                    System.out.print("\n");
+
+                    vidaCastJug-=tropaCPU.getDato().getDano();
+                    matriz[1][0]=Double.toString(vidaCastJug);
+                    matriz[0][2]= "-";
+                    matriz[1][2]= tropaCPU.getDato().letra.toUpperCase();
+                    for (int i=0;i<3;i++){
+                        for (int j=0;j<8;j++){
+                           System.out.print(matriz[i][j]+" "); 
+                        }
+                    System.out.println(""); 
+                    } 
+                    System.out.print("\n");
+                } else{ //Tercera validacion de batalla
+                    matriz[0][4]= "X";
+                    matriz[0][3]= "X";
+                    for (int i=0;i<3;i++){
+                        for (int j=0;j<8;j++){
+                           System.out.print(matriz[i][j]+" "); 
+                        }
+                    System.out.println(""); 
+                    } 
+                    System.out.print("\n\n----Ambas tropas murieron en el combate---\n\n");
+                }
+
+            //Fin primera situacion  ***********************
+
+            }else if(tropaJug.getDato().camino==2 || tropaCPU.getDato().camino==1){
+                matriz[0][0]="-- ";
+                matriz[2][0]="-- ";
+                matriz[0][7]=" --";
+                matriz[2][7]=" --";
+                matriz[1][1]="T";
+                matriz[1][6]="T";
+                matriz[0][2]= tropaJug.getDato().letra.toUpperCase();
+
+                matriz[1][0]=Double.toString(vidaCastJug);
+                matriz[1][7]=Double.toString(vidaCastCPU);
+                for (int i=0;i<3;i++){
+                        for (int j=0;j<8;j++){
+                           System.out.print(matriz[i][j]+" "); 
+                        }
+                    System.out.println(""); 
+                } 
+                System.out.print("\n");
+
+                matriz[0][5]= tropaCPU.getDato().letra.toUpperCase();
+                for (int i=0;i<3;i++){
+                        for (int j=0;j<8;j++){
+                           System.out.print(matriz[i][j]+" "); 
+                        }
+                    System.out.println(""); 
+                } 
+                System.out.print("\n");
+                matriz[0][2]= "-";
+                matriz[0][5]= "-";
+                matriz[0][3]= tropaJug.getDato().letra.toUpperCase();
+                matriz[0][4]= tropaCPU.getDato().letra.toUpperCase();
+                for (int i=0;i<3;i++){
+                        for (int j=0;j<8;j++){
+                           System.out.print(matriz[i][j]+" "); 
+                        }
+                    System.out.println(""); 
+                } 
+                System.out.print("\n");
+                
+                //Primera validacion de batalla
+                if (tropaJug.getDato().ventaja==tropaCPU.getDato().letra){
+                    matriz[0][3]= "-";
+                    matriz[0][4]= "X";
+                    matriz[0][5]= tropaJug.getDato().letra.toUpperCase();
+                    for (int i=0;i<3;i++){
+                        for (int j=0;j<8;j++){
+                           System.out.print(matriz[i][j]+" "); 
+                        }
+                    System.out.println(""); 
+                    } 
+                    System.out.print("\n");
+
+                    vidaCastCPU-=tropaJug.getDato().getDano();
+                    matriz[1][7]=Double.toString(vidaCastCPU);
+                    matriz[0][5]= "-";
+                    matriz[1][5]= tropaJug.getDato().letra.toUpperCase();
+                    for (int i=0;i<3;i++){
+                        for (int j=0;j<8;j++){
+                           System.out.print(matriz[i][j]+" "); 
+                        }
+                    System.out.println(""); 
+                    } 
+                    System.out.print("\n");
+                } else if (tropaCPU.getDato().ventaja==tropaJug.getDato().letra){ //Segunda validacion de batalla
+                    matriz[0][4]= "-";
+                    matriz[0][3]= "X";
+                    matriz[0][2]= tropaCPU.getDato().letra.toUpperCase();
+                    for (int i=0;i<3;i++){
+                        for (int j=0;j<8;j++){
+                           System.out.print(matriz[i][j]+" "); 
+                        }
+                    System.out.println(""); 
+                    } 
+                    System.out.print("\n");
+
+                    vidaCastJug-=tropaCPU.getDato().getDano();
+                    matriz[1][0]=Double.toString(vidaCastJug);
+                    matriz[0][2]= "-";
+                    matriz[1][2]= tropaCPU.getDato().letra.toUpperCase();
+                    for (int i=0;i<3;i++){
+                        for (int j=0;j<8;j++){
+                           System.out.print(matriz[i][j]+" "); 
+                        }
+                    System.out.println(""); 
+                    } 
+                    System.out.print("\n");
+                } else{ //Tercera validacion de batalla
+                    matriz[0][4]= "X";
+                    matriz[0][3]= "X";
+                    for (int i=0;i<3;i++){
+                        for (int j=0;j<8;j++){
+                           System.out.print(matriz[i][j]+" "); 
+                        }
+                    System.out.println(""); 
+                    } 
+                    System.out.print("\n\n----Ambas tropas murieron en el combate---\n\n");
+                }
+            //Fin segunda situacion  ***********************
+
+            }else if(tropaJug.getDato().camino==1 || tropaCPU.getDato().camino==2){
+                matriz[0][0]="-- ";
+                matriz[2][0]="-- ";
+                matriz[0][7]=" --";
+                matriz[2][7]=" --";
+                matriz[1][1]="C";
+                matriz[1][6]="C";
+                matriz[0][2]="Maria";
+                matriz[1][0]=Double.toString(vidaCastJug);
+                matriz[1][7]=Double.toString(vidaCastCPU);
+                for (int i=0;i<3;i++){
+                        for (int j=0;j<8;j++){
+                           System.out.print(matriz[i][j]+" "); 
+                        }
+                    System.out.println(""); 
+                } 
+                System.out.print("\n");
+
+                matriz[1][0]=Double.toString(vidaCastJug);
+                matriz[1][7]=Double.toString(vidaCastCPU);
+                matriz[0][2]="-";
+                matriz[0][3]="M";
+                for (int i=0;i<3;i++){
+                        for (int j=0;j<8;j++){
+                           System.out.print(matriz[i][j]+" "); 
+                        }
                 System.out.println(""); 
-            } 
-            System.out.print("\n");
+                }
+            //Fin tercera situacion  ***********************
 
-            matriz[1][0]=Double.toString(vidaCastJug);
-            matriz[1][7]=Double.toString(vidaCastCPU);
-            matriz[0][2]="-";
-            matriz[0][3]="M";
-            for (int i=0;i<3;i++){
-                    for (int j=0;j<8;j++){
-                       System.out.print(matriz[i][j]+" "); 
-                    }
-            System.out.println(""); 
-            }
-        }else if(tropaJug.getDato().camino==1 || tropaCPU.getDato().camino==2){
-            matriz[0][0]="-- ";
-            matriz[2][0]="-- ";
-            matriz[0][7]=" --";
-            matriz[2][7]=" --";
-            matriz[1][1]="C";
-            matriz[1][6]="C";
-            matriz[0][2]="M";
-            matriz[1][0]=Double.toString(vidaCastJug);
-            matriz[1][7]=Double.toString(vidaCastCPU);
-            for (int i=0;i<3;i++){
-                    for (int j=0;j<8;j++){
-                       System.out.print(matriz[i][j]+" "); 
-                    }
+            }else if(tropaJug.getDato().camino==2 || tropaCPU.getDato().camino==2){
+                matriz[0][0]="-- ";
+                matriz[2][0]="-- ";
+                matriz[0][7]=" --";
+                matriz[2][7]=" --";
+                matriz[1][1]="C";
+                matriz[1][6]="C";
+                matriz[0][2]="Melany";
+                matriz[1][0]=Double.toString(vidaCastJug);
+                matriz[1][7]=Double.toString(vidaCastCPU);
+                for (int i=0;i<3;i++){
+                        for (int j=0;j<8;j++){
+                           System.out.print(matriz[i][j]+" "); 
+                        }
+                    System.out.println(""); 
+                } 
+                System.out.print("\n");
+
+                matriz[1][0]=Double.toString(vidaCastJug);
+                matriz[1][7]=Double.toString(vidaCastCPU);
+                matriz[0][2]="-";
+                matriz[0][3]="M";
+                for (int i=0;i<3;i++){
+                        for (int j=0;j<8;j++){
+                           System.out.print(matriz[i][j]+" "); 
+                        }
                 System.out.println(""); 
-            } 
-            System.out.print("\n");
-
-            matriz[1][0]=Double.toString(vidaCastJug);
-            matriz[1][7]=Double.toString(vidaCastCPU);
-            matriz[0][2]="-";
-            matriz[0][3]="M";
-            for (int i=0;i<3;i++){
-                    for (int j=0;j<8;j++){
-                       System.out.print(matriz[i][j]+" "); 
-                    }
-            System.out.println(""); 
-            }
-        }else if(tropaJug.getDato().camino==2 || tropaCPU.getDato().camino==2){
-            matriz[0][0]="-- ";
-            matriz[2][0]="-- ";
-            matriz[0][7]=" --";
-            matriz[2][7]=" --";
-            matriz[1][1]="C";
-            matriz[1][6]="C";
-            matriz[0][2]="M";
-            matriz[1][0]=Double.toString(vidaCastJug);
-            matriz[1][7]=Double.toString(vidaCastCPU);
-            for (int i=0;i<3;i++){
-                    for (int j=0;j<8;j++){
-                       System.out.print(matriz[i][j]+" "); 
-                    }
-                System.out.println(""); 
-            } 
-            System.out.print("\n");
-
-            matriz[1][0]=Double.toString(vidaCastJug);
-            matriz[1][7]=Double.toString(vidaCastCPU);
-            matriz[0][2]="-";
-            matriz[0][3]="M";
-            for (int i=0;i<3;i++){
-                    for (int j=0;j<8;j++){
-                       System.out.print(matriz[i][j]+" "); 
-                    }
-            System.out.println(""); 
-            }
+                }
+            }//Fin cuarta situacion  ***********************
         }
         
         
         
         
         
-        matriz[0][0]="-- ";
-        matriz[2][0]="-- ";
-        matriz[0][7]=" --";
-        matriz[2][7]=" --";
-        matriz[1][1]="C";
-        matriz[1][6]="C";
-        matriz[0][2]="M";
-        matriz[1][0]=Double.toString(vidaCastJug);
-        matriz[1][7]=Double.toString(vidaCastCPU);
-        for (int i=0;i<3;i++){
-                for (int j=0;j<8;j++){
-                   System.out.print(matriz[i][j]+" "); 
-                }
-            System.out.println(""); 
-        } 
-        System.out.print("\n");
-        
-        matriz[1][0]=Double.toString(vidaCastJug);
-        matriz[1][7]=Double.toString(vidaCastCPU);
-        matriz[0][2]="-";
-        matriz[0][3]="M";
-        for (int i=0;i<3;i++){
-                for (int j=0;j<8;j++){
-                   System.out.print(matriz[i][j]+" "); 
-                }
-            System.out.println(""); 
-        }
         
     }//Cierre de metodo campo batalla
 }//Parentesis final
