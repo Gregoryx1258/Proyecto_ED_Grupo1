@@ -1,6 +1,6 @@
 
-import javax.swing.JOptionPane;
 
+import java.util.Scanner;
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
@@ -8,27 +8,32 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author gaval
+ * @author 
  */
 public class Menu {
+    private Scanner scanner = new Scanner(System.in);
     public void menu(){
+        Juego obj1 = new Juego();
         byte cont=0;
         while(cont==0){
-        byte opc = Byte.parseByte(JOptionPane.showInputDialog(null, "Digite el número correspondiente a la acción a realizar "
+        System.out.print("Digite el numero correspondiente a la accion a realizar "
                 + "\n1-Jugar"
-                + "\n2-Salir"));  
+                + "\n2-Salir\n-"); 
+            int opc=scanner.nextInt();
+            scanner.nextLine();
             switch (opc){
             case 1:
-                JOptionPane.showMessageDialog(null, "Jugar");
+                obj1.jugar();
                 break;
             case 2:
                 cont++;
                     break;
             default :
-                JOptionPane.showMessageDialog(null, "La opción digitada es incorrecta");
+                System.out.println("La opción digitada es incorrecta");
                 break;    
             }        
         }
+    scanner.close();
     }
 
 }
