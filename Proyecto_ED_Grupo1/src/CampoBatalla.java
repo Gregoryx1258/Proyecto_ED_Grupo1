@@ -20,46 +20,10 @@ public class CampoBatalla {
                matriz[i][j]="-"; 
             }
         }  
-        NodoTropa tropaJug = obj2.atiende();
-        System.out.print(tropaJug);
-        NodoTropa tropaCPU = obj3.atiende();
+        obj2.toString();
+
         //Van las dos primeras tropas por el mismo camino
-        if (tropaJug.getDato().camino==1 || tropaCPU.getDato().camino==1){
-            matriz[0][0]="-- ";
-        matriz[2][0]="-- ";
-        matriz[0][7]=" --";
-        matriz[2][7]=" --";
-        matriz[1][1]="C";
-        matriz[1][6]="C";
-        matriz[0][2]="M";
-        matriz[1][0]=Double.toString(vidaCastJug);
-        matriz[1][7]=Double.toString(vidaCastCPU);
-        for (int i=0;i<3;i++){
-                for (int j=0;j<8;j++){
-                   System.out.print(matriz[i][j]+" "); 
-                }
-            System.out.println(""); 
-        } 
-        System.out.print("\n");
         
-        matriz[1][0]=Double.toString(vidaCastJug);
-        matriz[1][7]=Double.toString(vidaCastCPU);
-        matriz[0][2]="-";
-        matriz[0][3]="M";
-        for (int i=0;i<3;i++){
-                for (int j=0;j<8;j++){
-                   System.out.print(matriz[i][j]+" "); 
-                }
-            System.out.println(""); 
-        }
-        
-        }else if(tropaJug.getDato().camino==2 || tropaCPU.getDato().camino==1){
-    
-        }else if(tropaJug.getDato().camino==1 || tropaCPU.getDato().camino==2){
-    
-        }else if(tropaJug.getDato().camino==2 || tropaCPU.getDato().camino==2){
-    
-        }
         
         
         

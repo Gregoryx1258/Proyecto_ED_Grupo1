@@ -110,7 +110,172 @@ public void jugar() {
         obj1.campoBatalla();
         numOleada++;
     
-    }
-scanner.close();
-}
-}
+    }//Cierre de ciclo while de los cases
+    scanner.close();
+    }//Cierre de metodo jugar
+
+  ////////// Fin de la fase de preparacion, inicio de la seccion de mostrar la batalla
+    ///Realizada en la misma clase ya que los metodos de las colas no se pueden utilizar en multiples clases a la vez
+    //Declaracion Variables
+    double vidaCastCPU=10, vidaCastJug=10;
+    public void campoBatalla(){     
+        String[][] matriz=new String[3][8];
+        for (int i=0;i<3;i++){
+            for (int j=0;j<8;j++){
+               matriz[i][j]="-"; 
+            }
+        }  
+        NodoTropa tropaJug = obj2.atiende();
+        NodoTropa tropaCPU = obj3.atiende();
+        //Van las dos primeras tropas por el mismo camino
+        if (tropaJug.getDato().camino==1 || tropaCPU.getDato().camino==1){
+            matriz[0][0]="-- ";
+            matriz[2][0]="-- ";
+            matriz[0][7]=" --";
+            matriz[2][7]=" --";
+            matriz[1][1]="C";
+            matriz[1][6]="C";
+            matriz[0][2]="M";
+            matriz[1][0]=Double.toString(vidaCastJug);
+            matriz[1][7]=Double.toString(vidaCastCPU);
+            for (int i=0;i<3;i++){
+                    for (int j=0;j<8;j++){
+                       System.out.print(matriz[i][j]+" "); 
+                    }
+                System.out.println(""); 
+            } 
+            System.out.print("\n");
+
+            matriz[1][0]=Double.toString(vidaCastJug);
+            matriz[1][7]=Double.toString(vidaCastCPU);
+            matriz[0][2]="-";
+            matriz[0][3]="M";
+            for (int i=0;i<3;i++){
+                    for (int j=0;j<8;j++){
+                       System.out.print(matriz[i][j]+" "); 
+                    }
+            System.out.println(""); 
+            }
+        
+        }else if(tropaJug.getDato().camino==2 || tropaCPU.getDato().camino==1){
+            matriz[0][0]="-- ";
+            matriz[2][0]="-- ";
+            matriz[0][7]=" --";
+            matriz[2][7]=" --";
+            matriz[1][1]="C";
+            matriz[1][6]="C";
+            matriz[0][2]="M";
+            matriz[1][0]=Double.toString(vidaCastJug);
+            matriz[1][7]=Double.toString(vidaCastCPU);
+            for (int i=0;i<3;i++){
+                    for (int j=0;j<8;j++){
+                       System.out.print(matriz[i][j]+" "); 
+                    }
+                System.out.println(""); 
+            } 
+            System.out.print("\n");
+
+            matriz[1][0]=Double.toString(vidaCastJug);
+            matriz[1][7]=Double.toString(vidaCastCPU);
+            matriz[0][2]="-";
+            matriz[0][3]="M";
+            for (int i=0;i<3;i++){
+                    for (int j=0;j<8;j++){
+                       System.out.print(matriz[i][j]+" "); 
+                    }
+            System.out.println(""); 
+            }
+        }else if(tropaJug.getDato().camino==1 || tropaCPU.getDato().camino==2){
+            matriz[0][0]="-- ";
+            matriz[2][0]="-- ";
+            matriz[0][7]=" --";
+            matriz[2][7]=" --";
+            matriz[1][1]="C";
+            matriz[1][6]="C";
+            matriz[0][2]="M";
+            matriz[1][0]=Double.toString(vidaCastJug);
+            matriz[1][7]=Double.toString(vidaCastCPU);
+            for (int i=0;i<3;i++){
+                    for (int j=0;j<8;j++){
+                       System.out.print(matriz[i][j]+" "); 
+                    }
+                System.out.println(""); 
+            } 
+            System.out.print("\n");
+
+            matriz[1][0]=Double.toString(vidaCastJug);
+            matriz[1][7]=Double.toString(vidaCastCPU);
+            matriz[0][2]="-";
+            matriz[0][3]="M";
+            for (int i=0;i<3;i++){
+                    for (int j=0;j<8;j++){
+                       System.out.print(matriz[i][j]+" "); 
+                    }
+            System.out.println(""); 
+            }
+        }else if(tropaJug.getDato().camino==2 || tropaCPU.getDato().camino==2){
+            matriz[0][0]="-- ";
+            matriz[2][0]="-- ";
+            matriz[0][7]=" --";
+            matriz[2][7]=" --";
+            matriz[1][1]="C";
+            matriz[1][6]="C";
+            matriz[0][2]="M";
+            matriz[1][0]=Double.toString(vidaCastJug);
+            matriz[1][7]=Double.toString(vidaCastCPU);
+            for (int i=0;i<3;i++){
+                    for (int j=0;j<8;j++){
+                       System.out.print(matriz[i][j]+" "); 
+                    }
+                System.out.println(""); 
+            } 
+            System.out.print("\n");
+
+            matriz[1][0]=Double.toString(vidaCastJug);
+            matriz[1][7]=Double.toString(vidaCastCPU);
+            matriz[0][2]="-";
+            matriz[0][3]="M";
+            for (int i=0;i<3;i++){
+                    for (int j=0;j<8;j++){
+                       System.out.print(matriz[i][j]+" "); 
+                    }
+            System.out.println(""); 
+            }
+        }
+        
+        
+        
+        
+        
+        matriz[0][0]="-- ";
+        matriz[2][0]="-- ";
+        matriz[0][7]=" --";
+        matriz[2][7]=" --";
+        matriz[1][1]="C";
+        matriz[1][6]="C";
+        matriz[0][2]="M";
+        matriz[1][0]=Double.toString(vidaCastJug);
+        matriz[1][7]=Double.toString(vidaCastCPU);
+        for (int i=0;i<3;i++){
+                for (int j=0;j<8;j++){
+                   System.out.print(matriz[i][j]+" "); 
+                }
+            System.out.println(""); 
+        } 
+        System.out.print("\n");
+        
+        matriz[1][0]=Double.toString(vidaCastJug);
+        matriz[1][7]=Double.toString(vidaCastCPU);
+        matriz[0][2]="-";
+        matriz[0][3]="M";
+        for (int i=0;i<3;i++){
+                for (int j=0;j<8;j++){
+                   System.out.print(matriz[i][j]+" "); 
+                }
+            System.out.println(""); 
+        }
+        
+    }//Cierre de metodo campo batalla
+}//Parentesis final
+
+

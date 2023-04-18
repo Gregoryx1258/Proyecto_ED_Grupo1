@@ -28,7 +28,6 @@ public class ColaJug {
         }
         largo++;
     }
-    
     public NodoTropa atiende(){
         NodoTropa aux = frente;
         if(frente!=null){
