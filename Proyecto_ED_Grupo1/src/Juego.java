@@ -16,6 +16,8 @@ public class Juego {
 ColaJug obj2 = new ColaJug();
 ColaCPU obj3 = new ColaCPU();
 Random r = new Random();
+Tiempo tiempo = new Tiempo(); //Metodo para el cronometro
+        
     //-------------
 //Declaracion de variables
 private int cantidadTropas = 1;
@@ -25,6 +27,7 @@ String personaje=null;
 
 public void jugar() {
     cont=0;
+    numOleada = 1;
     //Ciclo de las oleadas -General-
     System.out.println("Este juego consiste en derrotar el castillo del jugador contrario+"
             + "\nSe ecogeran tropas para atacar el castillo, habrán dos caminos, si dos tropas se topan, pelearan"
@@ -35,8 +38,8 @@ public void jugar() {
             + "\nArquero   ->1"
             + "\n\nPresione enter para empezar el juego\n-");
     String enter = scanner.nextLine();
-    delay(3000); // Retraso de 3 segundos usando el método delay
-    
+    //Se inicia el cronometro cuando inicia la oleada
+    tiempo.iniciarCronometro();
     while (cont==0) {
         System.out.println("Oleada #"+numOleada+"\n****FASE DE PREPARACION***\n\n");
         cantidadTropas = numOleada + 4;
@@ -135,17 +138,19 @@ public void jugar() {
     ///Realizada en la misma clase ya que los metodos de las colas no se pueden utilizar en multiples clases a la vez
     //Declaracion Variables
     double vidaCastCPU=10, vidaCastJug=10;
-    public void campoBatalla(){ 
-        int contbatallas=1;
+    public int campoBatalla(){ 
+        int contBatallas=1;
         String[][] matriz=new String[3][8];
-        delay(2000); // Retraso de 3 segundos usando el método delay
-        
-        while (contbatallas<numOleada + 4){
+         
+        while (contBatallas<numOleada + 4){
             for (int i=0;i<3;i++){
                 for (int j=0;j<8;j++){
                    matriz[i][j]="-"; 
                 }
             } 
+            this.delay(500);
+            System.out.println("\nInicio de la batalla #"+contBatallas+"\n");
+            this.delay(2000);
             NodoTropa tropaJug = obj2.atiende();
             NodoTropa tropaCPU = obj3.atiende(); 
             System.out.println("\n");
@@ -178,8 +183,14 @@ public void jugar() {
                     matriz[0][4]= "X";
                     matriz[0][5]= tropaJug.getDato().letra.toUpperCase();
                     this.mostrarBatalla(matriz);
-
                     vidaCastCPU-=tropaJug.getDato().getDano();
+                    if (vidaCastCPU<=0){//Llamada a meetodo para validar si la partida terminó segun la vida del castillo
+                    matriz[1][7]=(" "+Double.toString(0));
+                    matriz[1][6]="X";
+                    this.mostrarBatalla(matriz);
+                    this.batallaTerminada();
+                    return 1;//Saca del metodo campoBatalla
+                    }            
                     matriz[1][7]=Double.toString(vidaCastCPU);
                     matriz[0][5]= "-";
                     matriz[1][5]= tropaJug.getDato().letra.toUpperCase();
@@ -191,6 +202,13 @@ public void jugar() {
                     this.mostrarBatalla(matriz);
 
                     vidaCastJug-=tropaCPU.getDato().getDano();
+                    if (vidaCastJug<=0){//Llamada a meetodo para validar si la partida terminó segun la vida del castillo
+                    matriz[1][0]=(" "+Double.toString(0));
+                    matriz[1][1]="X";
+                    this.mostrarBatalla(matriz);
+                    this.batallaTerminada();
+                    return 1;//Saca del metodo campoBatalla
+                    }
                     matriz[1][0]=Double.toString(vidaCastJug);
                     matriz[0][2]= "-";
                     matriz[1][2]= tropaCPU.getDato().letra.toUpperCase();
@@ -208,7 +226,9 @@ public void jugar() {
                     System.out.print("\n\n----Ambas tropas murieron en el combate---\n\n");
                     this.delay(1000);
                 }
+
             //Fin primera situacion  ***********************
+
             }else if(tropaJug.getDato().camino==2 && tropaCPU.getDato().camino==1){
                 matriz[0][0]="-- ";
                 matriz[2][0]="-- ";
@@ -244,11 +264,25 @@ public void jugar() {
                 matriz[2][5]= "-";
                 matriz[1][5]= tropaJug.getDato().letra.toUpperCase();
                 vidaCastCPU-=tropaJug.getDato().getDano();
+                if (vidaCastCPU<=0){//Llamada a meetodo para validar si la partida terminó segun la vida del castillo
+                    matriz[1][7]=(" "+Double.toString(0));
+                    matriz[1][6]="X";
+                    this.mostrarBatalla(matriz);
+                    this.batallaTerminada();
+                    return 1;//Saca del metodo campoBatalla
+                }
                 matriz[1][7]=Double.toString(vidaCastCPU);
                 this.mostrarBatalla(matriz);
                 matriz[0][2]= "-";
                 matriz[1][2]= tropaCPU.getDato().letra.toUpperCase();
                 vidaCastJug-=tropaCPU.getDato().getDano();
+                if (vidaCastJug<=0){//Llamada a meetodo para validar si la partida terminó segun la vida del castillo
+                    matriz[1][0]=(" "+Double.toString(0));
+                    matriz[1][1]="X";
+                    this.mostrarBatalla(matriz);
+                    this.batallaTerminada();
+                    return 1;//Saca del metodo campoBatalla
+                }
                 matriz[1][0]=Double.toString(vidaCastJug);
                 this.mostrarBatalla(matriz);
                 
@@ -289,12 +323,25 @@ public void jugar() {
                 matriz[0][5]= "-";
                 matriz[1][5]= tropaJug.getDato().letra.toUpperCase();
                 vidaCastCPU-=tropaJug.getDato().getDano();
+                if (vidaCastCPU<=0){//Llamada a meetodo para validar si la partida terminó segun la vida del castillo
+                    matriz[1][7]=(" "+Double.toString(0));
+                    matriz[1][6]="X";
+                    this.mostrarBatalla(matriz);
+                    this.batallaTerminada();
+                    return 1;//Saca del metodo campoBatalla
+                }
                 matriz[1][7]=Double.toString(vidaCastCPU);
                 this.mostrarBatalla(matriz);
-                matriz[2
-                        ][2]= "-";
+                matriz[2][2]= "-";
                 matriz[1][2]= tropaCPU.getDato().letra.toUpperCase();
                 vidaCastJug-=tropaCPU.getDato().getDano();
+                if (vidaCastJug<=0){//Llamada a meetodo para validar si la partida terminó segun la vida del castillo
+                    matriz[1][0]=(" "+Double.toString(0));
+                    matriz[1][1]="X";
+                    this.mostrarBatalla(matriz);
+                    this.batallaTerminada();
+                    return 1;//Saca del metodo campoBatalla
+                }
                 matriz[1][0]=Double.toString(vidaCastJug);
                 this.mostrarBatalla(matriz);
             //Fin tercera situacion  ***********************
@@ -329,6 +376,13 @@ public void jugar() {
                     this.mostrarBatalla(matriz);
 
                     vidaCastCPU-=tropaJug.getDato().getDano();
+                    if (vidaCastCPU<=0){//Llamada a meetodo para validar si la partida terminó segun la vida del castillo
+                    matriz[1][7]=(" "+Double.toString(0));
+                    matriz[1][6]="X";
+                    this.mostrarBatalla(matriz);
+                    this.batallaTerminada();
+                    return 1;//Saca del metodo campoBatalla
+                    }
                     matriz[1][7]=Double.toString(vidaCastCPU);
                     matriz[2][5]= "-";
                     matriz[1][5]= tropaJug.getDato().letra.toUpperCase();
@@ -340,6 +394,13 @@ public void jugar() {
                     this.mostrarBatalla(matriz);
 
                     vidaCastJug-=tropaCPU.getDato().getDano();
+                    if (vidaCastJug<=0){//Llamada a meetodo para validar si la partida terminó segun la vida del castillo
+                    matriz[1][0]=(" "+Double.toString(0));
+                    matriz[1][1]="X";
+                    this.mostrarBatalla(matriz);
+                    this.batallaTerminada();
+                    return 1;//Saca del metodo campoBatalla
+                    }
                     matriz[1][0]=Double.toString(vidaCastJug);
                     matriz[2][2]= "-";
                     matriz[1][2]= tropaCPU.getDato().letra.toUpperCase();
@@ -358,9 +419,10 @@ public void jugar() {
                     this.delay(1000);
                 }
             }//Fin cuarta situacion  ***********************
-            contbatallas++;
+            contBatallas++;
         }// Fin contador batallas
-        
+        System.out.println("\nInicio de la batalla #"+contBatallas+"\n");
+        this.delay(2000);
         NodoTropa tropaJug = obj2.atiende();
         for (int i=0;i<3;i++){
             for (int j=0;j<8;j++){
@@ -391,6 +453,13 @@ public void jugar() {
                 matriz[2][5]= "-";
                 matriz[1][5]= tropaJug.getDato().letra.toUpperCase();
                 vidaCastCPU-=tropaJug.getDato().getDano();
+                if (vidaCastCPU<=0){//Llamada a meetodo para validar si la partida terminó segun la vida del castillo
+                    matriz[1][7]=(" "+Double.toString(0));
+                    matriz[1][6]="X";
+                    this.mostrarBatalla(matriz);
+                    this.batallaTerminada();
+                    return 1;//Saca del metodo campoBatalla
+                }
                 matriz[1][7]=Double.toString(vidaCastCPU);
                 this.mostrarBatalla(matriz);
             }else if(tropaJug.getDato().camino==1){
@@ -417,10 +486,17 @@ public void jugar() {
                 matriz[0][5]= "-";
                 matriz[1][5]= tropaJug.getDato().letra.toUpperCase();
                 vidaCastCPU-=tropaJug.getDato().getDano();
+                if (vidaCastCPU<=0){//Llamada a meetodo para validar si la partida terminó segun la vida del castillo
+                    matriz[1][7]=(" "+Double.toString(0));
+                    matriz[1][6]="X";
+                    this.mostrarBatalla(matriz);
+                    this.batallaTerminada();
+                    return 1;//Saca del metodo campoBatalla
+                }
                 matriz[1][7]=Double.toString(vidaCastCPU);
-                this.mostrarBatalla(matriz);         
+                this.mostrarBatalla(matriz);
             }
-  
+        return 0;
     }//Cierre de metodo campo batalla
     
     private void delay(long milis)
@@ -449,6 +525,7 @@ public void jugar() {
             this.delay(1000);
             System.out.println("Finalizando juego, saliendo al menu.....");
             this.delay(1500);
+            tiempo.detenerCronometro();//Se detiene el cronometro una vez termina la partida
             cont=1;//Contador correspondiente al ciclo de la fase de preparacion, poner un 1 signfica que se finalizará la oleada
             return 1;//Indica que se debe detener la batalla
         }else if(vidaCastCPU<=0){
@@ -458,6 +535,7 @@ public void jugar() {
             this.delay(1000);
             System.out.println("Finalizando juego, saliendo al menu.....");
             this.delay(1500);
+            tiempo.detenerCronometro();//Se detiene el cronometro una vez termina la partida
             cont=1;//Contador correspondiente al ciclo de la fase de preparacion, poner un 1 signfica que se finalizará la partida
             return 1;//Indica que se debe detener la batalla
         }
