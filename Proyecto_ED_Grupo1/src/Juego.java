@@ -154,6 +154,7 @@ public void jugar() {
                 
                 matriz[0][4]= tropaCPU.getDato().letra.toUpperCase();
                 this.mostrarBatalla(matriz);
+                batallaTerminada();
                 //Primera validacion de batalla
                 if (tropaJug.getDato().ventaja==tropaCPU.getDato().letra){
                     matriz[0][3]= "-";
@@ -236,7 +237,7 @@ public void jugar() {
                 matriz[1][0]=Double.toString(vidaCastJug);
                 this.mostrarBatalla(matriz);
                 
-           //Fin segunda situacion  ***********************
+            //Fin segunda situacion  ***********************
 
             }else if(tropaJug.getDato().camino==1 && tropaCPU.getDato().camino==2){
                 matriz[0][0]="-- ";
@@ -430,8 +431,17 @@ public void jugar() {
                 System.out.print("\n");
                 this.delay(1000);
     }
+    
+    private void batallaTerminada(){
+        if (vidaCastJug>=0 ) {
+            System.out.println("Ha ganado el cpu");
+            cont=1;
+        }else if(vidaCastCPU>=0){
+            System.out.println("Has ganado");
+            cont=1;
+        }
+    }
+    
 }//Parentesis final
-
-
-
+    
 
