@@ -24,6 +24,7 @@ private Scanner scanner = new Scanner(System.in);
 String personaje=null;
 
 public void jugar() {
+    cont=0;
     //Ciclo de las oleadas -General-
     System.out.println("Este juego consiste en derrotar el castillo del jugador contrario+"
             + "\nSe ecogeran tropas para atacar el castillo, habrán dos caminos, si dos tropas se topan, pelearan"
@@ -78,13 +79,25 @@ public void jugar() {
                         break;
                 }
             }            
-        }
+        }//Fin de fase preparacion de usuario 
+        
         cantidadTropas = numOleada + 3;
+        int contCamino1=0, contCamino2=0; //Contadores para poder delimitar las tropas de la CPU por un camino al 75%
         while (cantidadTropas>0) {
             for (int i = 0; i < numOleada + 3; i++) {
                 String letraAlCPU = "cma";
                 personaje = String.valueOf(letraAlCPU.charAt(r.nextInt(letraAlCPU.length()))); 
-                int camino= (int)(Math.random() * 2) + 1;
+                int camino=(int)(Math.random() * 2) + 1;
+                if (camino==1){
+                    contCamino1+=1;
+                }else{
+                    contCamino2+=1;
+                }
+                if (contCamino1>(numOleada + 3)*0.75){
+                    camino=2;
+                }else if(contCamino2>(numOleada + 3)*0.75){
+                   camino=1; 
+                }
                 switch (personaje) {
                     case "c":
                         //llamar encola para ingresar los datos automaticamente CPU
@@ -106,7 +119,10 @@ public void jugar() {
         }        
         }
         System.out.println(obj3.toString());
+        this.delay(3000);
         System.out.println("\n\n***FIN DE FASE DE PREPARACION***");
+        this.delay(2000);
+        System.out.println("\n\n***FASE DE BATALLA***");
         System.out.println("\n\n***COMIENZA LA  OLEADA #"+numOleada+"***");
         
         this.campoBatalla();
@@ -192,9 +208,7 @@ public void jugar() {
                     System.out.print("\n\n----Ambas tropas murieron en el combate---\n\n");
                     this.delay(1000);
                 }
-
             //Fin primera situacion  ***********************
-
             }else if(tropaJug.getDato().camino==2 && tropaCPU.getDato().camino==1){
                 matriz[0][0]="-- ";
                 matriz[2][0]="-- ";
@@ -379,9 +393,6 @@ public void jugar() {
                 vidaCastCPU-=tropaJug.getDato().getDano();
                 matriz[1][7]=Double.toString(vidaCastCPU);
                 this.mostrarBatalla(matriz);
-                
-            //Fin segunda situacion  ***********************
-
             }else if(tropaJug.getDato().camino==1){
                 matriz[0][0]="-- ";
                 matriz[2][0]="-- ";
@@ -407,10 +418,7 @@ public void jugar() {
                 matriz[1][5]= tropaJug.getDato().letra.toUpperCase();
                 vidaCastCPU-=tropaJug.getDato().getDano();
                 matriz[1][7]=Double.toString(vidaCastCPU);
-                this.mostrarBatalla(matriz);
-                
-            //Fin tercera situacion  ***********************
-
+                this.mostrarBatalla(matriz);         
             }
   
     }//Cierre de metodo campo batalla
@@ -433,9 +441,27 @@ public void jugar() {
                 System.out.print("\n");
                 this.delay(1000);
     }
+    private int batallaTerminada(){
+        if (vidaCastJug<=0 ) {
+            System.out.println("El enemigo ha destruido tu castillo");
+            this.delay(1000);
+            System.out.println("Has perdido la partida");
+            this.delay(1000);
+            System.out.println("Finalizando juego, saliendo al menu.....");
+            this.delay(1500);
+            cont=1;//Contador correspondiente al ciclo de la fase de preparacion, poner un 1 signfica que se finalizará la oleada
+            return 1;//Indica que se debe detener la batalla
+        }else if(vidaCastCPU<=0){
+            System.out.println("Has destruido el castillo enemigo");
+            this.delay(1000);
+            System.out.println("FELICIDADES, ganaste la partida");
+            this.delay(1000);
+            System.out.println("Finalizando juego, saliendo al menu.....");
+            this.delay(1500);
+            cont=1;//Contador correspondiente al ciclo de la fase de preparacion, poner un 1 signfica que se finalizará la partida
+            return 1;//Indica que se debe detener la batalla
+        }
+        return -1;//Indica seguir con la batalla
+    }
     
 }//Parentesis final
-
-
-
-
