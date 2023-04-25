@@ -26,7 +26,7 @@ public class Menu {
                 obj1.jugar();
                 break;
             case 2:
-                cont++;
+                System.exit(0);
                 break;
             default :
                 System.out.println("La opción digitada es incorrecta");
